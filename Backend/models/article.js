@@ -5,7 +5,7 @@ const Article = mongoose.model('Article', {
     title: {
         type: String
     },
-    idAuther: {
+    idAuthor: {
         type: String
     },
     description: {

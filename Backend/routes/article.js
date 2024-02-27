@@ -37,23 +37,71 @@ router.post('/ajout', upload.single('image'), (req, res) => {
 });
 
 router.get('/all', (req, res) => {
-    // Handle getting all articles
+    Article.find({})
+        .then(articles => {
+            res.status(200).send(articles);
+        })
+        .catch(err => {
+            res.status(400).send(err);
+        });
 });
 
 router.get('/getbyid/:id', (req, res) => {
-    // Handle getting article by ID
+    let id = req.params.id;
+    Article.findOne({_id: id})
+        .then(articles => {
+            res.status(200).send(articles);
+        })
+        .catch(err => {
+            res.status(400).send(err);
+        });
 });
 
 router.get('/getbyidauthor/:id', (req, res) => {
-    // Handle getting articles by author ID
+
+    let id = req.params.id;
+
+    Article.find({ idAuthor: id })
+        .then(articles => {
+            res.status(200).send(articles);
+        })
+        .catch(err => {
+            res.status(400).send(err);
+        });
 });
 
-router.delete('/supprimer/:id', (req, res) => {
-    // Handle deleting article by ID
+router.put('/update/:id', upload.single('image'), (req, res) => {
+    let id = req.params.id;
+    let data = req.body;
+    data.tags = data.tags.split(',');
+    
+    // Check if a new image is uploaded
+    if (req.file) {
+        data.image = req.file.filename;
+    }
+    
+    Article.findByIdAndUpdate(id, data, { new: true })
+        .then(article => {
+            res.status(200).send(article);
+        })
+        .catch(err => {
+            res.status(400).send(err);
+        });
 });
 
-router.put('/update/:id', (req, res) => {
-    // Handle updating article by ID
+
+
+
+router.delete('/delete/:id', (req, res) => {
+    let id = req.params.id;
+
+    Article.findByIdAndDelete({_id: id})
+        .then(article => {
+            res.status(200).send(article);
+        })
+        .catch(err => {
+            res.status(400).send(err);
+        });
 });
 
 module.exports = router;
