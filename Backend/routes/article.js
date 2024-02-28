@@ -5,15 +5,16 @@ const Article = require('../models/article');
 
 const multer = require('multer');
 
-let filename = ''; // Ensure filename is scoped to this module
+let filename = '';
 
 const mystorage = multer.diskStorage({
     destination: './uploads',
     filename: (req, file, redirect) => {
         let date = Date.now();
         let fl = date + '-' + file.mimetype.split('/')[1];
-        filename = fl; // Assign filename here
         redirect(null, fl);
+        filename = fl;
+        
     }
 });
 
