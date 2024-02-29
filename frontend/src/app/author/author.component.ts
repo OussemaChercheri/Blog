@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-author',
@@ -12,8 +13,8 @@ export class AuthorComponent implements OnInit {
 
   id: any;
   author: any;
-
-  constructor(private act: ActivatedRoute, private _auth: AuthService) { }
+  articles: any;
+  constructor(private act: ActivatedRoute, private _auth: AuthService, private data: DataService) { }
 
   ngOnInit(): void {
 
@@ -25,6 +26,17 @@ export class AuthorComponent implements OnInit {
           console.log(this.author);
         }
       );
+    this.data.getArticleByIdAuthor(this.id)
+      .subscribe(
+        res => {
+          this.articles = res;
+        },
+        err => {
+          console.log(err);
+        }
+      );
+
+
 
   }
 

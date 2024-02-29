@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-blog-list',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogListComponent implements OnInit {
 
-  constructor() { }
+  articles: any;
+
+  constructor(private data: DataService ) { }
 
   ngOnInit(): void {
+
+    this.data.getAll()
+      .subscribe(
+        res => {
+          this.articles = res;
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 
 }

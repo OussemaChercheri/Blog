@@ -18,6 +18,7 @@ import { CoverComponent } from './home/cover/cover.component';
 import { BlogListComponent } from './home/blog-list/blog-list.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularEditorComponent, AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
