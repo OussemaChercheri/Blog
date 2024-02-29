@@ -17,5 +17,27 @@ export class AuthService {
   login(author: any){
     return this.http.post(this.url + '/login', author);
   }
+
+  isLoggedIn(){
+    let token = localStorage.getItem('token');
+    if(token){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  getAuthorDataFormRoken(){
+    let token = localStorage.getItem('token');
+    if (token){
+      let data = JSON.parse(window.atob(token.split('.')[1]));
+      return data;
+    }
+  }
+
+  getById(id: any){
+    return this.http.get(this.url + '/getbyid/' + id);
+  }
+
 }
 

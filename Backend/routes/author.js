@@ -62,7 +62,7 @@ router.post('/login', (req, res) => {
             }
         })
         .catch(err => {
-            res.status(500).send(err); // Changed to return server error status
+            res.status(500).send(err);
         });
 });
 
